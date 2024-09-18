@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,6 +13,8 @@ public class BigMeteor : MonoBehaviour
         
     }
 
+    public static event Action BigMeteorDestroyed;
+
     // Update is called once per frame
     void Update()
     {
@@ -24,6 +27,7 @@ public class BigMeteor : MonoBehaviour
 
         if (hitCount >= 5)
         {
+            BigMeteorDestroyed();
             Destroy(this.gameObject);
         }
     }
