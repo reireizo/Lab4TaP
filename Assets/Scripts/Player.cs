@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
     public GameObject laserPrefab;
+    Vector2 movementVector;
 
     private float speed = 6f;
     private float horizontalScreenLimit = 10f;
@@ -12,9 +14,16 @@ public class Player : MonoBehaviour
     private bool canShoot = true;
 
     // Start is called before the first frame update
-    void Start()
+    void OnEnable()
     {
+
+
         
+    }
+
+    void OnDisable()
+    {
+
     }
 
     // Update is called once per frame
@@ -23,10 +32,14 @@ public class Player : MonoBehaviour
         Movement();
         Shooting();
     }
+    private void MovementInput(Vector2 input)
+    {
+        movementVector = input;
+    }
 
     void Movement()
     {
-        transform.Translate(new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0) * Time.deltaTime * speed);
+        transform.Translate(new Vector3(movementVector.x, movementVector.y, 0) * Time.deltaTime * speed);
         if (transform.position.x > horizontalScreenLimit || transform.position.x <= -horizontalScreenLimit)
         {
             transform.position = new Vector3(transform.position.x * -1f, transform.position.y, 0);
