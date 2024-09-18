@@ -12,10 +12,12 @@ public class GameManager : MonoBehaviour
     public CinemachineVirtualCamera vCamera;
 
     GameObject player;
+    GameObject bigMeteor;
 
     public bool gameOver = false;
 
     public int meteorCount = 0;
+    public int bigMeteorCount = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -49,11 +51,17 @@ public class GameManager : MonoBehaviour
     void SpawnMeteor()
     {
         Instantiate(meteorPrefab, new Vector3(Random.Range(-8, 8), 7.5f, 0), Quaternion.identity);
+        if (bigMeteorCount == 0)
+        {
+            CameraManager.instance.SwitchCamera(CameraType.PlayerCamera);
+        }
     }
 
     void BigMeteor()
     {
         meteorCount = 0;
         Instantiate(bigMeteorPrefab, new Vector3(Random.Range(-8, 8), 7.5f, 0), Quaternion.identity);
+        CameraManager.instance.SwitchCamera(CameraType.BossCamera);
+        bigMeteorCount++;
     }
 }

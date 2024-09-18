@@ -27,6 +27,7 @@ public class BigMeteor : Meteor
         if (hitCount >= 5)
         {
             OnMeteorDestroyed.Invoke();
+            GameObject.Find("GameManager").GetComponent<GameManager>().bigMeteorCount--;
             Destroy(this.gameObject);
         }
     }

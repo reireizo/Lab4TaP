@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Main Camera Blends
   m_EditorClassIdentifier: 
   m_CustomBlends:
-  - m_From: DefaultVCamera
-    m_To: BigMCamera
+  - m_From: PlayerCamera
+    m_To: BossCamera
     m_Blend:
       m_Style: 1
       m_Time: 2
