@@ -11,13 +11,13 @@ public class CameraEffect : MonoBehaviour
     // Start is called before the first frame update
     void OnEnable ()
     {
-        BigMeteor.BigMeteorDestroyed += ApplyScreenShake;
+        //BigMeteor.BigMeteorDestroyed += ApplyScreenShake;
     }
 
     // Update is called once per frame
     void OnDisable()
     {
-        BigMeteor.BigMeteorDestroyed -= ApplyScreenShake;
+        //BigMeteor.BigMeteorDestroyed -= ApplyScreenShake;
     }
 
     private void Awake()
@@ -25,7 +25,7 @@ public class CameraEffect : MonoBehaviour
         cinemachineImpulse = GetComponent<CinemachineImpulseSource>();
     }
 
-    private void ApplyScreenShake()
+    public void ApplyScreenShake()
     {
         cinemachineImpulse.GenerateImpulse();
     }

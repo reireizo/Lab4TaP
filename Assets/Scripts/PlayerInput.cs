@@ -28,11 +28,11 @@ public class PlayerInput : MonoBehaviour, PlayerControls.IKeyboardActions
 
     public void OnMove(InputAction.CallbackContext context)
     {
-        throw new System.NotImplementedException();
+        onMove(context.ReadValue<Vector2>());
     }
 
     public void OnShoot(InputAction.CallbackContext context)
     {
-        throw new System.NotImplementedException();
+        onShoot();
     }
 }

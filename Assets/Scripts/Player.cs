@@ -16,21 +16,19 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void OnEnable()
     {
-
-
+        PlayerInput.onMove += MovementInput;
+        PlayerInput.onShoot += Shooting;
         
     }
 
     void OnDisable()
     {
-
+        PlayerInput.onMove -= MovementInput;
+        PlayerInput.onShoot -= Shooting;
     }
-
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
         Movement();
-        Shooting();
     }
     private void MovementInput(Vector2 input)
     {
@@ -52,11 +50,11 @@ public class Player : MonoBehaviour
 
     void Shooting()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && canShoot)
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             Instantiate(laserPrefab, transform.position + new Vector3(0, 1, 0), Quaternion.identity);
-            canShoot = false;
-            StartCoroutine("Cooldown");
+            //canShoot = false;
+            //StartCoroutine("Cooldown");
         }
     }
 

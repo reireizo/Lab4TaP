@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BigMeteor : MonoBehaviour
+public class BigMeteor : Meteor
 {
     private int hitCount = 0;
 
@@ -13,7 +13,6 @@ public class BigMeteor : MonoBehaviour
         
     }
 
-    public static event Action BigMeteorDestroyed;
 
     // Update is called once per frame
     void Update()
@@ -27,7 +26,7 @@ public class BigMeteor : MonoBehaviour
 
         if (hitCount >= 5)
         {
-            BigMeteorDestroyed();
+            OnMeteorDestroyed.Invoke();
             Destroy(this.gameObject);
         }
     }
@@ -42,6 +41,7 @@ public class BigMeteor : MonoBehaviour
         else if (whatIHit.tag == "Laser")
         {
             hitCount++;
+
             Destroy(whatIHit.gameObject);
         }
     }

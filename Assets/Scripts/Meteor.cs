@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Meteor : MonoBehaviour
 {
+    [SerializeField]
+    public UnityEvent OnMeteorDestroyed;
     
     // Start is called before the first frame update
     void Start()
@@ -32,6 +35,7 @@ public class Meteor : MonoBehaviour
         } else if (whatIHit.tag == "Laser")
         {
             GameObject.Find("GameManager").GetComponent<GameManager>().meteorCount++;
+            OnMeteorDestroyed.Invoke();
             Destroy(whatIHit.gameObject);
             Destroy(this.gameObject);
         }
