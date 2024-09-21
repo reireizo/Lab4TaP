@@ -9,7 +9,6 @@ public class GameManager : MonoBehaviour
     public GameObject playerPrefab;
     public GameObject meteorPrefab;
     public GameObject bigMeteorPrefab;
-    public CinemachineVirtualCamera vCamera;
 
     GameObject player;
     GameObject bigMeteor;
@@ -20,13 +19,20 @@ public class GameManager : MonoBehaviour
     public int bigMeteorCount = 0;
 
     // Start is called before the first frame update
-    void Start()
+    void OnEnable()
+    {
+        PlayerInput.onRestart += RestartGame;
+    }
+
+    void OnDisable()
+    {
+        PlayerInput.onRestart -= RestartGame;
+    }
+    void Awake()
     {
         player = Instantiate(playerPrefab, transform.position, Quaternion.identity);
+        CameraManager.instance.player = player.transform;
         InvokeRepeating("SpawnMeteor", 1f, 2f);
-        vCamera.Follow = player.transform;
-        vCamera.LookAt = player.transform;
-
     }
 
     // Update is called once per frame
@@ -35,11 +41,6 @@ public class GameManager : MonoBehaviour
         if (gameOver)
         {
             CancelInvoke();
-        }
-
-        if (Input.GetKeyDown(KeyCode.R) && gameOver)
-        {
-            SceneManager.LoadScene("Week5Lab");
         }
 
         if (meteorCount == 5)
@@ -54,6 +55,7 @@ public class GameManager : MonoBehaviour
         if (bigMeteorCount == 0)
         {
             CameraManager.instance.SwitchCamera(CameraType.PlayerCamera);
+            
         }
     }
 
@@ -63,5 +65,13 @@ public class GameManager : MonoBehaviour
         Instantiate(bigMeteorPrefab, new Vector3(Random.Range(-8, 8), 7.5f, 0), Quaternion.identity);
         CameraManager.instance.SwitchCamera(CameraType.BossCamera);
         bigMeteorCount++;
+    }
+
+    void RestartGame()
+    {
+        if (gameOver) 
+        {
+            SceneManager.LoadScene("Week5Lab");
+        }
     }
 }

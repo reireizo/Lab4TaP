@@ -9,9 +9,15 @@ public class CameraManager : MonoBehaviour
     public static CameraManager instance;
 
     // Dictionary to map enum values to Cinemachine virtual cameras
-    public Dictionary<CameraType, CinemachineVirtualCamera> cameraDictionary = new Dictionary<CameraType, CinemachineVirtualCamera>();
+    public Dictionary<CameraType, CinemachineVirtualCamera> cameraDictionary = new Dictionary<CameraType, CinemachineVirtualCamera>(){};
     // Reference to the currently active virtual camera private
     CinemachineVirtualCamera currentCamera;
+    public CinemachineVirtualCamera playerCamera;
+    public CinemachineVirtualCamera bossCamera;
+    public Transform player;
+    
+
+    public List <CinemachineVirtualCamera> cameras;
 
 
     private void Awake()
@@ -24,6 +30,9 @@ public class CameraManager : MonoBehaviour
         {
             instance = this;
         }
+
+        cameraDictionary.Add(CameraType.PlayerCamera, playerCamera);
+        cameraDictionary.Add(CameraType.BossCamera, bossCamera);
     }
 
     void Start() { SwitchCamera(CameraType.PlayerCamera); }
@@ -36,6 +45,8 @@ public class CameraManager : MonoBehaviour
         if (cameraDictionary.ContainsKey(newCameraType))
         {
             currentCamera = cameraDictionary[newCameraType];
+            currentCamera.Follow = player.transform;
+            currentCamera.LookAt = player.transform;
             currentCamera.gameObject.SetActive(true);
         }
         else

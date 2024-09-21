@@ -8,6 +8,8 @@ public class PlayerInput : MonoBehaviour, PlayerControls.IKeyboardActions
 {
     private PlayerControls playerControls;
     public static UnityAction onShoot = delegate { };
+
+    public static UnityAction onRestart = delegate { };
     public static UnityAction<Vector2> onMove = delegate { };
     void OnEnable()
     {
@@ -33,6 +35,14 @@ public class PlayerInput : MonoBehaviour, PlayerControls.IKeyboardActions
 
     public void OnShoot(InputAction.CallbackContext context)
     {
-        onShoot();
+        if (context.started)
+        {
+            onShoot();
+        }
     }
+
+    public void OnRestart(InputAction.CallbackContext context)
+    {
+        onRestart();
+    }  
 }
