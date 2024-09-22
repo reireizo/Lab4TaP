@@ -12,6 +12,9 @@ public class Player : MonoBehaviour
     private float horizontalScreenLimit = 10f;
     private float verticalScreenLimit = 6f;
 
+    public AudioClip shootSFX;
+    AudioSource audioSource;
+
     // Start is called before the first frame update
     void OnEnable()
     {
@@ -24,6 +27,10 @@ public class Player : MonoBehaviour
     {
         PlayerInput.onMove -= MovementInput;
         PlayerInput.onShoot -= Shooting;
+    }
+    void Awake()
+    {
+        audioSource = GetComponent<AudioSource>();
     }
     private void Update()
     {
@@ -50,5 +57,7 @@ public class Player : MonoBehaviour
     void Shooting()
     {
         Instantiate(laserPrefab, transform.position + new Vector3(0, 1, 0), Quaternion.identity);
+        audioSource.PlayOneShot(shootSFX);
+
     }
 }
