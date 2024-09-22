@@ -43,6 +43,10 @@ public class PlayerInput : MonoBehaviour, PlayerControls.IKeyboardActions
 
     public void OnRestart(InputAction.CallbackContext context)
     {
-        onRestart();
+        if(context.performed)
+        {
+            onRestart();
+        }
+
     }  
 }

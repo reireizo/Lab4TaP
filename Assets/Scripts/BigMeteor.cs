@@ -39,7 +39,7 @@ public class BigMeteor : Meteor
         if (whatIHit.tag == "Player")
         {
             GameObject.Find("GameManager").GetComponent<GameManager>().gameOver = true;
-            Destroy(whatIHit.gameObject);
+            whatIHit.gameObject.SetActive(false);
         }
         else if (whatIHit.tag == "Laser")
         {
