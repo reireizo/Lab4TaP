@@ -5,6 +5,9 @@ using UnityEngine.Events;
 
 public class Meteor : MonoBehaviour
 {
+    public AudioClip breakSound;
+
+    public GameObject soundEffect;
     [SerializeField]
     public UnityEvent OnMeteorDestroyed;
     
@@ -25,8 +28,10 @@ public class Meteor : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D whatIHit)
+    public virtual void OnTriggerEnter2D(Collider2D whatIHit)
     {
+
+        GameManager.soundEffect.PlayOneShot(breakSound);
         if (whatIHit.tag == "Player")
         {
             GameObject.Find("GameManager").GetComponent<GameManager>().gameOver = true;
@@ -36,6 +41,7 @@ public class Meteor : MonoBehaviour
         {
             GameObject.Find("GameManager").GetComponent<GameManager>().meteorCount++;
             OnMeteorDestroyed.Invoke();
+            
             Destroy(whatIHit.gameObject);
             Destroy(this.gameObject);
         }

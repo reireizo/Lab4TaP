@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Build;
 using UnityEngine;
 
 public class BigMeteor : Meteor
@@ -28,11 +29,12 @@ public class BigMeteor : Meteor
         {
             OnMeteorDestroyed.Invoke();
             GameObject.Find("GameManager").GetComponent<GameManager>().bigMeteorCount--;
+            GameManager.soundEffect.PlayOneShot(breakSound);
             Destroy(this.gameObject);
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D whatIHit)
+    public override void OnTriggerEnter2D(Collider2D whatIHit)
     {
         if (whatIHit.tag == "Player")
         {
@@ -42,7 +44,6 @@ public class BigMeteor : Meteor
         else if (whatIHit.tag == "Laser")
         {
             hitCount++;
-
             Destroy(whatIHit.gameObject);
         }
     }

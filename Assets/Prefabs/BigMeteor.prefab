@@ -163,6 +163,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 147004292113bf34cba36a179026f4ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  breakSound: {fileID: 8300000, guid: 66b72bc1685ddc74aa1173bc86d5f20a, type: 3}
+  soundEffect: {fileID: 0}
   OnMeteorDestroyed:
     m_PersistentCalls:
       m_Calls:

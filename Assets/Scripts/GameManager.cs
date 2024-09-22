@@ -13,6 +13,8 @@ public class GameManager : MonoBehaviour
     GameObject player;
     GameObject bigMeteor;
 
+    public static AudioSource soundEffect;
+
     public bool gameOver = false;
 
     public int meteorCount = 0;
@@ -31,6 +33,7 @@ public class GameManager : MonoBehaviour
     void Awake()
     {
         player = Instantiate(playerPrefab, transform.position, Quaternion.identity);
+        soundEffect = GetComponent<AudioSource>();
         CameraManager.instance.player = player.transform;
         InvokeRepeating("SpawnMeteor", 1f, 2f);
     }
