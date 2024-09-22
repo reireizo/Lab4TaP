@@ -8,7 +8,6 @@ public class PlayerInput : MonoBehaviour, PlayerControls.IKeyboardActions
 {
     private PlayerControls playerControls;
     public static UnityAction onShoot = delegate { };
-
     public static UnityAction onRestart = delegate { };
     public static UnityAction<Vector2> onMove = delegate { };
     void OnEnable()
@@ -19,8 +18,6 @@ public class PlayerInput : MonoBehaviour, PlayerControls.IKeyboardActions
             playerControls.Keyboard.SetCallbacks(this);
         }
         playerControls.Keyboard.Enable();
-
-
     }
 
     void OnDisable()
@@ -47,6 +44,5 @@ public class PlayerInput : MonoBehaviour, PlayerControls.IKeyboardActions
         {
             onRestart();
         }
-
     }  
 }

@@ -11,7 +11,6 @@ public class GameManager : MonoBehaviour
     public GameObject bigMeteorPrefab;
 
     GameObject player;
-    GameObject bigMeteor;
 
     public static AudioSource soundEffect;
 

@@ -7,15 +7,7 @@ using UnityEngine;
 public class BigMeteor : Meteor
 {
     private int hitCount = 0;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-
-    // Update is called once per frame
+    public ParticleSystem bigExplode;
     void Update()
     {
         transform.Translate(Vector3.down * Time.deltaTime * 0.5f);
@@ -29,7 +21,7 @@ public class BigMeteor : Meteor
         {
             OnMeteorDestroyed.Invoke();
             GameObject.Find("GameManager").GetComponent<GameManager>().bigMeteorCount--;
-            GameManager.soundEffect.PlayOneShot(breakSound);
+            ExplodeEffect();
             Destroy(this.gameObject);
         }
     }
@@ -46,5 +38,12 @@ public class BigMeteor : Meteor
             hitCount++;
             Destroy(whatIHit.gameObject);
         }
+    }
+
+    public override void ExplodeEffect()
+    {
+        GameManager.soundEffect.PlayOneShot(breakSound);
+        var ex = Instantiate(bigExplode, this.transform.position, Quaternion.identity);
+        Destroy(ex.gameObject, 2f);
     }
 }
